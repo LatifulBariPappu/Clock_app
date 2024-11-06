@@ -1,26 +1,46 @@
 import React from "react";
 class Clock extends React.Component{
 
-    constructor(props){
-        super(props);
-        this.state = {date: new Date()};
-    }
-
+    state = {date: new Date(), locale: 'bn-BD'};
+   
+    
     componentDidMount(){
-        setInterval(() => {
-            this.setState({
-                    date: new Date(),
-                });
+        this.clkTimer = setInterval(() => {
+            this.tick()
         }, 1000);
     }
-     
+
+    componentWillUnmount(){
+        clearInterval(this.clkTimer);
+    }
+
+    
+    handleClick =(locale) =>{
+        this.setState({
+            locale
+        });
+
+    }
+    tick(){
+        this.setState({
+            date: new Date(),
+        });
+    }
+
+    
     render(){
+      const {date, locale} = this.state;
       return(
+        <div>
         <h1 className="heading">
-            <span className="text">The Time - 
-                {this.state.date.toLocaleTimeString(this.props.locale)}
+            <span className="text">Current Time in Dhaka  -
+                {date.toLocaleTimeString(locale)}
             </span>         
         </h1>
+        <button type="button" onClick={this.handleClick} locale = 'en-US'>
+            Click here
+        </button>
+        </div>
       );
     }
 }
