@@ -40,9 +40,9 @@ class Clock extends React.Component{
         </h1>
         {locale === 'bn-BD'?(
             <Button change={this.handleClick}
-            locale="en-US"/>):(
-                <Button change={this.handleClick} locale="bn-BD"/>
-            )}
+            locale="en-US" show={false}/>):(
+                <Button change={this.handleClick} locale="bn-BD" show/>
+        )}
         </div>
       );
     }
